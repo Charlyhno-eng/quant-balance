@@ -25,6 +25,8 @@ npm install
 npm run dev
 ```
 
+Libraries for graphs : https://plotly.com/javascript/
+
 ---
 
 ## Backend
@@ -35,7 +37,14 @@ uvicorn main:app --reload
 
 ##### Test the API:
 
-http://127.0.0.1:8000/risk_score?symbol=PENGU34466-USD
+http://127.0.0.1:8000/crypto_data?symbol=ENA-USD
+
+ENA-USD
+EIGEN-USD
+MORPHO34104-USD
+RAY-USD
+JUP29210-USD
+RSR-USD
 
 ---
 
@@ -44,7 +53,7 @@ http://127.0.0.1:8000/risk_score?symbol=PENGU34466-USD
 Here is a simple equation summarizing your risk calculation:
 
 $$
-\text{Risk Score} = 10 \times \text{clamp}\Big(0.5 \times \frac{\text{volatility}}{2} + 0.07 \times \text{scaleRSI}(rsi_{1h}) + 0.09 \times \text{scaleRSI}(rsi_{4h}) + 0.07 \times \text{scaleRSI}(rsi_{1d}) + 0.07 \times \text{scalePerf}(perf_{1d},20) + 0.09 \times \text{scalePerf}(perf_{7d},50) + 0.07 \times \text{scalePerf}(perf_{30d},100) + 0.06 \times \text{scalePerf}(perf_{90d},100), 1, 1\Big)
+\text{Risk Score} = 10 \times \text{clamp}\Big(0.5 \times \frac{\text{volatility}}{2} + 0.07 \times \text{scaleRSI}(rsi_{1h}) + 0.09 \times \text{scaleRSI}(rsi_{4h}) + 0.07 \times \text{scaleRSI}(rsi_{1d}) + 0.07 \times \text{scalePerf}(perf_{1d},20) + 0.09 \times \text{scalePerf}(perf_{7d},50) + 0.07 \times \text{scalePerf}(perf_{30d},100) + 0.06 \times \text{scalePerf}(perf_{90d},100) + 0.03 \times \text{scalePerf}(perf_{120d},100), 1, 1\Big)
 $$
 
 where:

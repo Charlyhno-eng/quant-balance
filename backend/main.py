@@ -1,10 +1,20 @@
 from fastapi import FastAPI, HTTPException, Query
-from services.risk_calculator import fetch_and_compute
+from fastapi.middleware.cors import CORSMiddleware
+from services.crypto_data import fetch_and_compute
 
-app = FastAPI(title="Crypto Risk API")
+app = FastAPI()
 
-@app.get("/risk_score")
-def get_risk_score(symbol: str = Query(...)):
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/crypto_data")
+def get_crypto_data(symbol: str = Query(...)):
     try:
         result = fetch_and_compute(symbol)
         return result
