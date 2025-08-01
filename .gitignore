@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# Virtual environnement
+.venv/
+env/
+venv/
+ENV/
+
+# Configuration / Secrets
+.env
+.env.local
+*.secret
+*.key
+*.pem
+
+# IDE
+.vscode/
+.idea/
+.ropeproject/
+
+# Logs
+*.log
+logs/
+*.sqlite3
+*.db
