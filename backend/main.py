@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 @app.get("/crypto_data")
-def get_crypto_data(symbol: str = Query(...)):
+def get_crypto_data(symbol: str = Query(..., min_length=2)):
     try:
         result = fetch_and_compute(symbol)
         return result

@@ -37,7 +37,7 @@ uvicorn main:app --reload
 
 ##### Test the API:
 
-http://127.0.0.1:8000/crypto_data?symbol=ENA-USD
+http://127.0.0.1:8000/crypto_data?symbol=ENA
 
 ENA-USD
 EIGEN-USD

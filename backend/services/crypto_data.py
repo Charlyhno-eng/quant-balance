@@ -1,6 +1,11 @@
+import ccxt
+import pandas as pd
 import numpy as np
-import yfinance as yf
 from ta.momentum import RSIIndicator
+from datetime import datetime, timedelta
+import time
+
+binance = ccxt.binance()
 
 def clamp01(x):
     return min(1, max(0, x))
@@ -38,24 +43,45 @@ def compute_risk_score(volatility, rsi_1h, rsi_4h, rsi_1d, perf_1d, perf_7d, per
     )
     return min(10, max(1, risk_score * 10))
 
+def fetch_ohlcv(symbol, timeframe, since_days):
+    since = int((datetime.utcnow() - timedelta(days=since_days)).timestamp() * 1000)
+    all_candles = []
+    limit = 1000
+
+    while True:
+        candles = binance.fetch_ohlcv(symbol, timeframe=timeframe, since=since, limit=limit)
+        if not candles:
+            break
+        all_candles.extend(candles)
+        if len(candles) < limit:
+            break
+        since = candles[-1][0] + 1
+        time.sleep(0.2)
+
+    df = pd.DataFrame(candles, columns=["timestamp", "open", "high", "low", "close", "volume"])
+    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
+    df.set_index("timestamp", inplace=True)
+    return df
+
 def fetch_and_compute(symbol: str) -> dict:
-    daily = yf.download(symbol, interval="1d", period="130d", progress=False)
-    hourly = yf.download(symbol, interval="1h", period="7d", progress=False)
+    market_symbol = f"{symbol}/USDT"
+
+    daily = fetch_ohlcv(market_symbol, "1d", 130)
+    hourly = fetch_ohlcv(market_symbol, "1h", 7)
 
     if daily.empty or hourly.empty:
         raise ValueError("Market data unavailable for the given symbol.")
 
-    daily_close = daily["Close"].squeeze()
-    hourly_close = hourly["Close"].squeeze()
+    daily_close = daily["close"]
+    hourly_close = hourly["close"]
 
     price_usd = float(daily_close.iloc[-1])
 
-    # Change the currency to EUR
-    fx = yf.download("EURUSD=X", interval="1d", period="5d", progress=False)
+    # EUR conversion
+    fx = fetch_ohlcv("EUR/USDT", "1d", 5)
     if fx.empty:
-        raise ValueError("FX data unavailable for EURUSD.")
-
-    eurusd_rate = float(fx["Close"].iloc[-1])
+        raise ValueError("EUR/USDT data unavailable.")
+    eurusd_rate = float(fx["close"].iloc[-1])
 
     price_eur = price_usd / eurusd_rate
 
@@ -66,12 +92,17 @@ def fetch_and_compute(symbol: str) -> dict:
     returns = np.log(daily_close / daily_close.shift(1)).dropna()
     volatility = float(returns.std() * np.sqrt(365))
 
-    perf_1d = ((daily_close.iloc[-1] / daily_close.iloc[-2] - 1) * 100)
-    perf_7d = ((daily_close.iloc[-1] / daily_close.iloc[-8] - 1) * 100)
-    perf_30d = ((daily_close.iloc[-1] / daily_close.iloc[-31] - 1) * 100)
-    perf_60d = ((daily_close.iloc[-1] / daily_close.iloc[-61] - 1) * 100)
-    perf_90d = ((daily_close.iloc[-1] / daily_close.iloc[-91] - 1) * 100)
-    perf_120d = ((daily_close.iloc[-1] / daily_close.iloc[-121] - 1) * 100)
+    def get_perf(n):
+        if len(daily_close) <= n:
+            return 0
+        return (daily_close.iloc[-1] / daily_close.iloc[-n - 1] - 1) * 100
+
+    perf_1d = get_perf(1)
+    perf_7d = get_perf(7)
+    perf_30d = get_perf(30)
+    perf_60d = get_perf(60)
+    perf_90d = get_perf(90)
+    perf_120d = get_perf(120)
 
     score = compute_risk_score(
         volatility=volatility,

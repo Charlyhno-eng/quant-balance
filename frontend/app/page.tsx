@@ -5,12 +5,12 @@ import { Box, Table, TableHead, TableRow, TableCell, TableBody, Typography, Pape
 import { RiskData } from '@/shared/types/typeMainPage';
 
 const symbolsWithAmount: { symbol: string; amount: number }[] = [
-  { symbol: "ENA-USD", amount: 8000 },
-  { symbol: "RAY-USD", amount: 1142 },
-  { symbol: "JUP29210-USD", amount: 6000 },
-  { symbol: "MORPHO34104-USD", amount: 1234 },
-  { symbol: "EIGEN-USD", amount: 1700 },
-  { symbol: "RSR-USD", amount: 180000 },
+  { symbol: "ENA", amount: 8000 },
+  { symbol: "RAY", amount: 1142 },
+  { symbol: "JUP", amount: 6000 },
+  { symbol: "MORPHO", amount: 1285 },
+  { symbol: "EIGEN", amount: 1700 },
+  { symbol: "RSR", amount: 180000 },
 ];
 
 const columns = [

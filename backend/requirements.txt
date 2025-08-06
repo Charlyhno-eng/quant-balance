@@ -4,5 +4,4 @@ pandas
 numpy
 ta
 ccxt
-yfinance
 python-dotenv
