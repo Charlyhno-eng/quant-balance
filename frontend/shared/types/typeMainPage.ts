@@ -13,3 +13,8 @@ export type RiskData = {
   perf_90d: number;
   perf_120d: number;
 };
+
+export type ExtendedRiskData = RiskData & { amount: number; total: number; allocation?: number };
+export type ExtendedRiskDataKeys = keyof RiskData | 'amount' | 'total' | 'allocation';
+
+export type SymbolAmount = { symbol: string; amount: number };

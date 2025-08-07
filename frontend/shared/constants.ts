@@ -1,0 +1,18 @@
+export const TABLE_COLUMNS = [
+  { key: 'symbol', label: 'Ticker' },
+  { key: 'amount', label: 'Nombre de token' },
+  { key: 'price_eur', label: 'Prix (€)', decimals: 4 },
+  { key: 'total', label: 'Total (€)', decimals: 2 },
+  { key: 'allocation', label: 'Répartition (%)', decimals: 2 },
+  { key: 'volatility', label: 'Volatilité', decimals: 4 },
+  { key: 'risk_score', label: 'Risque', decimals: 2 },
+  { key: 'perf_1d', label: 'Perf 1d', isPercent: true, decimals: 2 },
+  { key: 'perf_7d', label: 'Perf 7d', isPercent: true, decimals: 2 },
+  { key: 'perf_30d', label: 'Perf 30d', isPercent: true, decimals: 2 },
+  { key: 'perf_60d', label: 'Perf 60d', isPercent: true, decimals: 2 },
+  { key: 'perf_90d', label: 'Perf 90d', isPercent: true, decimals: 2 },
+  { key: 'perf_120d', label: 'Perf 120d', isPercent: true, decimals: 2 },
+  { key: 'rsi_1h', label: 'RSI 1h', decimals: 2 },
+  { key: 'rsi_4h', label: 'RSI 4h', decimals: 2 },
+  { key: 'rsi_1d', label: 'RSI 1d', decimals: 2 },
+];

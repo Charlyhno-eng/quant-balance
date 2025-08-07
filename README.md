@@ -2,6 +2,31 @@
 
 ## Overview
 
+![Overview v1](public/overview_v1.png)
+
+This application helps users **balance their crypto wallet** based on the **level of risk they are willing to take**. It provides a dashboard to visualize the current allocation, token metrics, and detailed risk indicators.
+
+### Key Features
+
+* Fetches real-time data for multiple cryptocurrencies using **CCXT**, a unified cryptocurrency trading library.
+* Displays detailed metrics such as:
+  * Token holdings
+  * Price and total value
+  * Risk score (from 1 to 10)
+  * RSI (Relative Strength Index) indicators
+  * Historical performance (1d, 7d, 30d, etc.)
+  * Volatility
+* Uses color-coded indicators to help quickly assess asset health (green = safer, red = riskier).
+* Allows users to **rebalance** their portfolio dynamically according to calculated risks and allocations.
+* Automatically refreshes data every 60 seconds for live updates.
+
+### Technologies
+
+* **Next.js** with **TypeScript** for the frontend
+* **Material UI (MUI)** for the UI components
+* **CCXT** for connecting to crypto exchanges and fetching market data
+* Backend server (assumed to be Python-based) to expose a REST API for crypto data
+
 ---
 
 ## Installation
@@ -35,16 +60,7 @@ Libraries for graphs : https://plotly.com/javascript/
 uvicorn main:app --reload
 ```
 
-##### Test the API:
-
-http://127.0.0.1:8000/crypto_data?symbol=ENA
-
-ENA-USD
-EIGEN-USD
-MORPHO34104-USD
-RAY-USD
-JUP29210-USD
-RSR-USD
+##### Test the API: http://127.0.0.1:8000/crypto_data?symbol=ENA
 
 ---
 
