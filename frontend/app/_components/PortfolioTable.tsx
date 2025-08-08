@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import { ExtendedRiskDataKeys, ExtendedRiskData } from '@/shared/types/typeMainPage';
-import { getPerfColor, getRSIColor, getRiskColor } from '@/shared/helpers';
+import { getPerfColor, getRSIColor, getRiskColor, sortByKey } from '@/shared/helpers';
 import { TABLE_COLUMNS } from '@/shared/constants';
 
 const sortableKeys = [
@@ -35,17 +35,7 @@ export default function PortfolioTable({ dataList }: { dataList: ExtendedRiskDat
     }
   };
 
-  const sortedData = [...dataList].sort((a, b) => {
-    if (!sortConfig.key) return 0;
-
-    const valueA = a[sortConfig.key];
-    const valueB = b[sortConfig.key];
-
-    if (typeof valueA === 'number' && typeof valueB === 'number') {
-      return sortConfig.direction === 'asc' ? valueA - valueB : valueB - valueA;
-    }
-    return 0;
-  });
+  const sortedData = sortByKey(dataList, sortConfig.key, sortConfig.direction);
 
   return (
     <Paper sx={{ width: "100%", p: 2, height: "40vh", overflowY: "auto", bgcolor: "rgba(10, 26, 51, 0.7)" }}>
