@@ -113,3 +113,13 @@ export function sortByKey( dataList: ExtendedRiskData[], key: ExtendedRiskDataKe
     return 0;
   });
 }
+
+/**
+ * Formats a number as a percentage string with two decimal places.
+ *
+ * @param {number} num - The numeric value to format as a percentage.
+ * @returns {string} The formatted percentage string (e.g., "12.34 %").
+ */
+export function formatPercent(num: number) {
+  return `${num.toFixed(2)} %`;
+}

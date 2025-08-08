@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { RiskData, ExtendedRiskData, SymbolAmount } from '@/shared/types/typeMainPage';
 import PortfolioTable from './_components/PortfolioTable';
-import GraphiqueUn from './_components/GraphiqueUn';
+import GraphiqueUn from './_components/WalletDistribution';
 import GraphiqueDeux from './_components/GraphiqueDeux';
 import symbolsWithAmount from '@/core/domain/data/symbols.json' assert { type: 'json' };
 
@@ -52,9 +52,7 @@ export default function Home() {
 
         const filtered = results.filter((r): r is ExtendedRiskData => r !== null);
         const totalPortfolio = filtered.reduce((sum, d) => sum + d.total, 0);
-        const withAllocation = filtered.map((d) => ({
-          ...d, allocation: totalPortfolio > 0 ? (d.total / totalPortfolio) * 100 : 0,
-        }));
+        const withAllocation = filtered.map((d) => ({ ...d, allocation: totalPortfolio > 0 ? (d.total / totalPortfolio) * 100 : 0 }));
 
         setDataList(withAllocation);
       } catch (err) {
