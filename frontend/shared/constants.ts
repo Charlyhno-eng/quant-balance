@@ -1,8 +1,8 @@
 export const TABLE_COLUMNS = [
   { key: 'symbol', label: 'Ticker' },
+  { key: 'total', label: 'Total (€)', decimals: 2 },
   { key: 'amount', label: 'Nombre de token' },
   { key: 'price_eur', label: 'Prix (€)', decimals: 4 },
-  { key: 'total', label: 'Total (€)', decimals: 2 },
   { key: 'allocation', label: 'Répartition (%)', decimals: 2 },
   { key: 'volatility', label: 'Volatilité', decimals: 4 },
   { key: 'risk_score', label: 'Risque', decimals: 2 },
