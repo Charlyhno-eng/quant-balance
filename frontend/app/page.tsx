@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { RiskData, ExtendedRiskData, SymbolAmount } from '@/shared/types/typeMainPage';
 import PortfolioTable from './_components/PortfolioTable';
-import GraphiqueUn from './_components/WalletDistribution';
-import GraphiqueDeux from './_components/GraphiqueDeux';
-import symbolsWithAmount from '@/core/domain/data/symbols.json' assert { type: 'json' };
+import PortfolioDistribution from './_components/PortfolioDistribution';
+import PortfolioBalancer from './_components/PortfolioBalancer';
+import myWalletWithAmount from '@/core/domain/data/myWallet.json' assert { type: 'json' };
 
-const typedSymbolsWithAmount = symbolsWithAmount as SymbolAmount[];
+const typedMyWalletWithAmount = myWalletWithAmount as SymbolAmount[];
 
 const fetchRiskData = async (symbol: string): Promise<RiskData> => {
   const response = await fetch(`http://127.0.0.1:8000/crypto_data?symbol=${encodeURIComponent(symbol)}`, {
@@ -24,7 +24,7 @@ const fetchRiskData = async (symbol: string): Promise<RiskData> => {
 };
 
 export default function Home() {
-  const [dataList, setDataList] = useState<ExtendedRiskData[]>([]);
+  const [myWalletList, setMyWalletList] = useState<ExtendedRiskData[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Home() {
 
       try {
         const results = await Promise.all(
-          typedSymbolsWithAmount.map(({ symbol, amount }) =>
+          typedMyWalletWithAmount.map(({ symbol, amount }) =>
             fetchRiskData(symbol)
               .then((data) => {
                 const total = data.price_eur * amount;
@@ -54,7 +54,7 @@ export default function Home() {
         const totalPortfolio = filtered.reduce((sum, d) => sum + d.total, 0);
         const withAllocation = filtered.map((d) => ({ ...d, allocation: totalPortfolio > 0 ? (d.total / totalPortfolio) * 100 : 0 }));
 
-        setDataList(withAllocation);
+        setMyWalletList(withAllocation);
       } catch (err) {
         if (isMounted) setError(err instanceof Error ? err.message : String(err));
       }
@@ -73,14 +73,14 @@ export default function Home() {
     <Box sx={{ width: "100%", p: 1 }}>
       {error && (<Typography color="error" sx={{ mt: 2 }}>{error}</Typography>)}
 
-      {dataList.length === 0 && !error && (<Typography>Aucune donnée disponible.</Typography>)}
-      {dataList.length > 0 && (
+      {myWalletList.length === 0 && !error && (<Typography>Aucune donnée disponible.</Typography>)}
+      {myWalletList.length > 0 && (
         <>
-          <Box sx={{ height: '40vh' }}><PortfolioTable dataList={dataList} /></Box>
+          <Box sx={{ height: '40vh' }}><PortfolioTable dataList={myWalletList} /></Box>
 
           <Box sx={{ display: 'flex', height: '57vh', mt: 1, gap: 1 }}>
-            <Box sx={{ width: '40%', height: '100%' }}><GraphiqueUn dataList={dataList} /></Box>
-            <Box sx={{ width: '60%', height: '100%' }}><GraphiqueDeux dataList={dataList} /></Box>
+            <Box sx={{ width: '40%', height: '100%' }}><PortfolioDistribution dataList={myWalletList} /></Box>
+            <Box sx={{ width: '60%', height: '100%' }}><PortfolioBalancer dataList={myWalletList} /></Box>
           </Box>
         </>
       )}

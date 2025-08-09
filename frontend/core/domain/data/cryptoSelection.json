@@ -1,0 +1,22 @@
+[
+  { "symbol": "USDC" },
+  { "symbol": "ENA" },
+  { "symbol": "AAVE" },
+  { "symbol": "ONDO" },
+  { "symbol": "JUP" },
+  { "symbol": "PUMP" },
+  { "symbol": "LDO" },
+  { "symbol": "AERO" },
+  { "symbol": "PENDLE" },
+  { "symbol": "VIRTUAL" },
+  { "symbol": "RAY" },
+  { "symbol": "MORPHO" },
+  { "symbol": "JTO" },
+  { "symbol": "SYRUP" },
+  { "symbol": "RSR" },
+  { "symbol": "ETHFI" },
+  { "symbol": "COMP" },
+  { "symbol": "KMNO" },
+  { "symbol": "SPK" },
+  { "symbol": "FLUID" }
+]

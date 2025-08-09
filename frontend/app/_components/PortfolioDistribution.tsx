@@ -7,7 +7,7 @@ import { ExtendedRiskData } from '@/shared/types/typeMainPage';
 import { generateColors, sortByTotalDesc, getRiskColor, formatPercent } from '@/shared/helpers';
 import { calculatePortfolioAverages } from '@/core/domain/portfolio';
 
-export default function WalletDistribution({ dataList }: { dataList: ExtendedRiskData[] }) {
+export default function PortfolioDistribution({ dataList }: { dataList: ExtendedRiskData[] }) {
   const chartRef = useRef<HTMLDivElement>(null);
 
   const { avgRisk, avgVolatility, avgPerf1d, avgPerf7d, avgPerf30d, avgPerf60d, avgPerf90d, avgPerf120d } = useMemo(() => calculatePortfolioAverages(dataList), [dataList]);
