@@ -123,3 +123,12 @@ export function sortByKey( dataList: ExtendedRiskData[], key: ExtendedRiskDataKe
 export function formatPercent(num: number) {
   return `${num.toFixed(2)} %`;
 }
+
+/**
+ * Calculates the total portfolio value in euros.
+ * @param dataList - An array of ExtendedRiskData objects representing each asset in the portfolio.
+ * @returns The total portfolio value in euros as a number.
+ */
+export function calculateTotalPortfolioValue(dataList: { total: number }[]): number {
+  return dataList.reduce((sum, item) => sum + item.total, 0);
+}
