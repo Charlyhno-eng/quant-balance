@@ -11,9 +11,7 @@ import myWalletWithAmount from '@/core/domain/data/myWallet.json' assert { type:
 const typedMyWalletWithAmount = myWalletWithAmount as SymbolAmount[];
 
 const fetchRiskData = async (symbol: string): Promise<RiskData> => {
-  const response = await fetch(`http://127.0.0.1:8000/crypto_data?symbol=${encodeURIComponent(symbol)}`, {
-    method: "GET",
-  });
+  const response = await fetch(`http://127.0.0.1:8000/crypto_data?symbol=${encodeURIComponent(symbol)}`, { method: "GET" });
 
   if (!response.ok) {
     const errorData = await response.json();

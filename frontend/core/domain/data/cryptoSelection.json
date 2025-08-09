@@ -2,7 +2,6 @@
   { "symbol": "USDC" },
   { "symbol": "ENA" },
   { "symbol": "AAVE" },
-  { "symbol": "ONDO" },
   { "symbol": "JUP" },
   { "symbol": "PUMP" },
   { "symbol": "LDO" },
@@ -17,6 +16,5 @@
   { "symbol": "ETHFI" },
   { "symbol": "COMP" },
   { "symbol": "KMNO" },
-  { "symbol": "SPK" },
-  { "symbol": "FLUID" }
+  { "symbol": "SPK" }
 ]

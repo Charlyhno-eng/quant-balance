@@ -1,15 +1,4 @@
-import { ExtendedRiskData } from '@/shared/types/typeMainPage';
-
-export type PortfolioAverages = {
-  avgRisk: number;
-  avgVolatility: number;
-  avgPerf1d: number;
-  avgPerf7d: number;
-  avgPerf30d: number;
-  avgPerf60d: number;
-  avgPerf90d: number;
-  avgPerf120d: number;
-}
+import { ExtendedRiskData, PortfolioAverages } from '@/shared/types/typeMainPage';
 
 /**
  * Calculate weighted averages of risk, volatility and performance metrics for a portfolio.

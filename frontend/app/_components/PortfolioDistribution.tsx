@@ -1,57 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useMemo } from 'react';
-import { Box, Typography, Divider, Button } from '@mui/material';
-import type { PieData, Layout } from 'plotly.js-dist-min';
+import { useMemo } from 'react';
+import { Box, Typography, Divider } from '@mui/material';
+import CustomTitle from '@/components/CustomTitle';
 import { ExtendedRiskData } from '@/shared/types/typeMainPage';
-import { generateColors, sortByTotalDesc, getRiskColor, formatPercent, calculateTotalPortfolioValue } from '@/shared/helpers';
+import { getRiskColor, formatPercent, calculateTotalPortfolioValue } from '@/shared/helpers';
 import { calculatePortfolioAverages } from '@/core/domain/portfolio';
 import { useRouter } from 'next/navigation';
+import PortfolioDistributionChart from './PortfolioDistributionChart';
 
 export default function PortfolioDistribution({ dataList }: { dataList: ExtendedRiskData[] }) {
-  const chartRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const { avgRisk, avgVolatility, avgPerf1d, avgPerf7d, avgPerf30d, avgPerf60d, avgPerf90d, avgPerf120d } = useMemo(() => calculatePortfolioAverages(dataList), [dataList]);
+  const { avgRisk, avgVolatility, avgPerf1d, avgPerf7d, avgPerf30d, avgPerf60d, avgPerf90d, avgPerf120d } =
+    useMemo(() => calculatePortfolioAverages(dataList), [dataList]);
   const totalPortfolioValue = useMemo(() => calculateTotalPortfolioValue(dataList), [dataList]);
-
-  useEffect(() => {
-    if (!chartRef.current || dataList.length === 0) return;
-
-    import('plotly.js-dist-min').then(Plotly => {
-      const chartNode = chartRef.current!;
-      const sortedData = sortByTotalDesc(dataList);
-      const values = sortedData.map(item => item.total);
-      const labels = sortedData.map(item => item.symbol);
-      const colors = generateColors(sortedData.length);
-
-      const data: Partial<PieData>[] = [
-        {
-          values,
-          labels,
-          type: 'pie',
-          hole: 0.4,
-          hovertemplate: '%{label}<br>%{percent}<br>%{value:.2f} €<extra></extra>',
-          textinfo: 'label+percent',
-          textposition: 'inside',
-          marker: { colors },
-          showlegend: true,
-        },
-      ];
-
-      const layout: Partial<Layout> = {
-        paper_bgcolor: 'rgba(10, 26, 51, 0.01)',
-        plot_bgcolor: 'rgba(10, 26, 51, 0.01)',
-        font: { color: '#8f00f5', family: "'Orbitron', sans-serif" },
-        legend: { font: { color: 'white' }, orientation: 'v', x: 1, y: 0.5 },
-        margin: { t: 30, b: 30, l: 20, r: 100 },
-      };
-
-      Plotly.newPlot(chartNode, data, layout, { responsive: true });
-
-      return () => { if (chartRef.current) Plotly.purge(chartRef.current) };
-    });
-  }, [dataList]);
 
   const perfLabels = [
     { label: '1 Day', value: avgPerf1d },
@@ -63,26 +26,16 @@ export default function PortfolioDistribution({ dataList }: { dataList: Extended
   ];
 
   return (
-    <Box sx={{ bgcolor: 'rgba(10, 26, 51, 0.7)', height: '100%', display: 'flex', flexDirection: 'column', color: 'white', }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 3, py: 2, }}>
-        <Typography sx={{ fontWeight: 600, fontSize: '1.2rem', letterSpacing: 1, color: 'white', textShadow: 'none' }}>
-          RÉPARTITION DU WALLET
-        </Typography>
+    <Box sx={{ bgcolor: 'rgba(10, 26, 51, 0.7)', height: '100%', display: 'flex', flexDirection: 'column', color: 'white' }}>
+      <CustomTitle
+        title="RÉPARTITION DU WALLET"
+        buttonLabel="Modifier le wallet"
+        onButtonClick={() => router.push('/myWallet')}
+      />
 
-        <Button
-          variant="contained"
-          onClick={() => router.push('/myWallet')}
-          sx={{ bgcolor: '#8f00f5', color: 'white', fontWeight: 600, textTransform: 'none', '&:hover': { backgroundColor: '#6c00b8' } }}
-        >
-          Modifier le wallet
-        </Button>
-      </Box>
-
-      <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.3)', mx: 3, mb: 1, borderWidth: 1 }}/>
-
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'row', px: 3, gap: 3, overflow: 'hidden' }}>
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'row', px: 3, gap: 3 }}>
         <Box sx={{ flex: 1, minWidth: 0, height: '100%' }}>
-          <Box ref={chartRef} sx={{ width: '100%', height: '100%' }} />
+          <PortfolioDistributionChart dataList={dataList} />
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: 1 }}>
@@ -92,12 +45,7 @@ export default function PortfolioDistribution({ dataList }: { dataList: Extended
 
           <Typography>
             <strong>Valeur totale:</strong>{' '}
-            <span>{totalPortfolioValue.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}€</span>
-          </Typography>
-
-          <Typography>
-            <strong>Score de risque moyen:</strong>{' '}
-            <span style={{ color: getRiskColor(avgRisk) }}>{avgRisk.toFixed(2)}</span>
+            <span>{totalPortfolioValue.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €</span>
           </Typography>
 
           <Typography>
@@ -105,7 +53,12 @@ export default function PortfolioDistribution({ dataList }: { dataList: Extended
             <span style={{ color: 'white' }}>{avgVolatility.toFixed(3)}</span>
           </Typography>
 
-          <Divider sx={{ borderColor: '#ffffff', my: 2, opacity: 0.3 }}/>
+          <Typography>
+            <strong>Score de risque moyen:</strong>{' '}
+            <span style={{ color: getRiskColor(avgRisk) }}>{avgRisk.toFixed(2)}</span>
+          </Typography>
+
+          <Divider sx={{ borderColor: '#ffffff', my: 2, opacity: 0.3 }} />
 
           <Typography sx={{ color: '#8f00f5', fontWeight: 600 }}>Performance moyenne</Typography>
           {perfLabels.map(({ label, value }) => (
