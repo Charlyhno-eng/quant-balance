@@ -34,6 +34,9 @@ export type CryptoData = {
     perf_1d: number;
     perf_7d: number;
     perf_30d: number;
+    perf_60d: number;
+    perf_90d: number;
+    perf_120d: number;
   };
 }
 

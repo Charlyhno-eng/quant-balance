@@ -32,14 +32,14 @@ def compute_risk_score(volatility, rsi_1h, rsi_4h, rsi_1d, perf_1d, perf_7d, per
 
     risk_score = (
         0.50 * vol_score +
-        0.07 * rsi_1h_score +
-        0.09 * rsi_4h_score +
-        0.07 * rsi_1d_score +
-        0.07 * perf_1d_score +
+        0.05 * rsi_1h_score +
+        0.07 * rsi_4h_score +
+        0.09 * rsi_1d_score +
+        0.1 * perf_1d_score +
         0.09 * perf_7d_score +
-        0.07 * perf_30d_score +
+        0.075 * perf_30d_score +
         0.06 * perf_90d_score +
-        0.03 * perf_120d_score
+        0.04 * perf_120d_score
     )
     return min(10, max(1, risk_score * 10))
 

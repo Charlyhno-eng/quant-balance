@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import type { PieData, Layout } from 'plotly.js-dist-min';
 import { generateColors } from '@/shared/helpers';
 
