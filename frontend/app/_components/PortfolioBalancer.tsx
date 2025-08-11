@@ -111,7 +111,7 @@ export default function PortfolioBalancer() {
 
       {wallet && stats && (
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'row', px: 3, gap: 3 }}>
-          <Box sx={{ flex: 1, width: 0, height: '100%' }}>
+          <Box sx={{ flex: 1, minWidth: 0, height: '100%' }}>
             <PortfolioBalancerChart wallet={wallet} />
           </Box>
 

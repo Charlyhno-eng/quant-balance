@@ -77,8 +77,8 @@ export default function Home() {
           <Box sx={{ height: '40vh' }}><PortfolioTable dataList={myWalletList} /></Box>
 
           <Box sx={{ display: 'flex', height: '57vh', mt: 1, gap: 1 }}>
-            <Box sx={{ width: '40%', height: '100%' }}><PortfolioDistribution dataList={myWalletList} /></Box>
-            <Box sx={{ width: '60%', height: '100%' }}><PortfolioBalancer /></Box>
+            <Box sx={{ width: '50%', height: '100%' }}><PortfolioDistribution dataList={myWalletList} /></Box>
+            <Box sx={{ width: '50%', height: '100%' }}><PortfolioBalancer /></Box>
           </Box>
         </>
       )}

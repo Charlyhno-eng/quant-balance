@@ -1,8 +1,26 @@
 [
-  { "symbol": "USDC", "amount": 7627 },
-  { "symbol": "RAY", "amount": 1142 },
-  { "symbol": "JUP", "amount": 7001 },
-  { "symbol": "EIGEN", "amount": 1300 },
-  { "symbol": "RSR", "amount": 180011 },
-  { "symbol": "ENA", "amount": 2000 }
+  {
+    "symbol": "USDC",
+    "amount": 7627
+  },
+  {
+    "symbol": "RAY",
+    "amount": 1142
+  },
+  {
+    "symbol": "JUP",
+    "amount": 7001
+  },
+  {
+    "symbol": "EIGEN",
+    "amount": 1300
+  },
+  {
+    "symbol": "RSR",
+    "amount": 180011
+  },
+  {
+    "symbol": "ENA",
+    "amount": 2000
+  }
 ]

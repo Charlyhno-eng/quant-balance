@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Box } from '@mui/material';
 import type { PieData, Layout } from 'plotly.js-dist-min';
 import { generateColors } from '@/shared/helpers';
 
@@ -45,9 +44,5 @@ export default function PortfolioBalancerChart({ wallet }: { wallet: { symbol: s
     });
   }, [wallet]);
 
-  return (
-    <Box sx={{ height: 400, width: '55%', mt: 4 }}>
-      <div ref={chartRef} style={{ width: '100%', height: '100%' }} />
-    </Box>
-  );
+  return <div ref={chartRef} style={{ width: '100%', height: '100%' }} />
 }

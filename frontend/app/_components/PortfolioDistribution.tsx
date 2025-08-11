@@ -12,8 +12,7 @@ import PortfolioDistributionChart from './PortfolioDistributionChart';
 export default function PortfolioDistribution({ dataList }: { dataList: ExtendedRiskData[] }) {
   const router = useRouter();
 
-  const { avgRisk, avgVolatility, avgPerf1d, avgPerf7d, avgPerf30d, avgPerf60d, avgPerf90d, avgPerf120d } =
-    useMemo(() => calculatePortfolioAverages(dataList), [dataList]);
+  const { avgRisk, avgVolatility, avgPerf1d, avgPerf7d, avgPerf30d, avgPerf60d, avgPerf90d, avgPerf120d } = useMemo(() => calculatePortfolioAverages(dataList), [dataList]);
   const totalPortfolioValue = useMemo(() => calculateTotalPortfolioValue(dataList), [dataList]);
 
   const perfLabels = [
