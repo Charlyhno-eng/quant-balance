@@ -69,7 +69,7 @@ uvicorn main:app --reload
 Here is a simple equation summarizing your risk calculation:
 
 $$
-\text{Risk Score} = 10 \times \text{clamp}\Big(0.5 \times \frac{\text{volatility}}{2} + 0.07 \times \text{scaleRSI}(rsi_{1h}) + 0.09 \times \text{scaleRSI}(rsi_{4h}) + 0.07 \times \text{scaleRSI}(rsi_{1d}) + 0.07 \times \text{scalePerf}(perf_{1d},20) + 0.09 \times \text{scalePerf}(perf_{7d},50) + 0.07 \times \text{scalePerf}(perf_{30d},100) + 0.06 \times \text{scalePerf}(perf_{90d},100) + 0.03 \times \text{scalePerf}(perf_{120d},100), 1, 1\Big)
+\text{Risk Score} = 10 \times \text{clamp}\Big(0.4 \times \frac{\text{volatility}}{2} + 0.08 \times \text{scaleRSI}(rsi_{1h}) + 0.10 \times \text{scaleRSI}(rsi_{4h}) + 0.13 \times \text{scaleRSI}(rsi_{1d}) + 0.12 \times \text{scalePerf}(perf_{1d},20) + 0.09 \times \text{scalePerf}(perf_{7d},50) + 0.075 \times \text{scalePerf}(perf_{30d},100) + 0.06 \times \text{scalePerf}(perf_{90d},100) + 0.04 \times \text{scalePerf}(perf_{120d},100), 1, 1\Big)
 $$
 
 where:
