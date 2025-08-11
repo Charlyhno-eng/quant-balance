@@ -2,7 +2,7 @@
 
 ## Overview
 
-![Overview v1](public/overview_v4.png)
+![Overview main page](public/overview.png)
 
 This application helps users **balance their crypto wallet** based on the **level of risk they are willing to take**. It provides a dashboard to visualize the current allocation, token metrics, and detailed risk indicators.
 
