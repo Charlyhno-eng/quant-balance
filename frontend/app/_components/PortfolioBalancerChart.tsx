@@ -35,8 +35,8 @@ export default function PortfolioBalancerChart({ wallet }: { wallet: { symbol: s
         paper_bgcolor: 'rgba(10, 26, 51, 0.01)',
         plot_bgcolor: 'rgba(10, 26, 51, 0.01)',
         font: { color: '#8f00f5', family: "'Orbitron', sans-serif" },
-        legend: { font: { color: 'white' }, orientation: 'v', x: 1, y: 0.5 },
-        margin: { t: 30, b: 30, l: 20, r: 100 },
+        legend: {  font: { color: 'white' },  orientation: 'v',  x: 1, y: 0.5 },
+        margin: { t: 30, b: 30, l: 20, r: 40 },
       };
 
       Plotly.newPlot(chartNode, data, layout, { responsive: true });
@@ -46,7 +46,7 @@ export default function PortfolioBalancerChart({ wallet }: { wallet: { symbol: s
   }, [wallet]);
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 400, width: '55%', mt: 4 }}>
       <div ref={chartRef} style={{ width: '100%', height: '100%' }} />
     </Box>
   );

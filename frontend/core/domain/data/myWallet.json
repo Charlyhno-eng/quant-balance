@@ -1,8 +1,8 @@
 [
-  { "symbol": "ENA", "amount": 8009 },
+  { "symbol": "USDC", "amount": 7627 },
   { "symbol": "RAY", "amount": 1142 },
   { "symbol": "JUP", "amount": 7001 },
-  { "symbol": "MORPHO", "amount": 1294 },
   { "symbol": "EIGEN", "amount": 1300 },
-  { "symbol": "RSR", "amount": 180011 }
+  { "symbol": "RSR", "amount": 180011 },
+  { "symbol": "ENA", "amount": 2000 }
 ]

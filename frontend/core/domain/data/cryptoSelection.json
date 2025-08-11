@@ -1,5 +1,7 @@
 [
   { "symbol": "USDC" },
+  { "symbol": "ETH" },
+  { "symbol": "SOL" },
   { "symbol": "ENA" },
   { "symbol": "AAVE" },
   { "symbol": "JUP" },

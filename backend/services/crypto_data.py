@@ -31,11 +31,11 @@ def compute_risk_score(volatility, rsi_1h, rsi_4h, rsi_1d, perf_1d, perf_7d, per
     perf_120d_score = scale_perf(perf_120d, 100.0)
 
     risk_score = (
-        0.50 * vol_score +
-        0.05 * rsi_1h_score +
-        0.07 * rsi_4h_score +
-        0.09 * rsi_1d_score +
-        0.1 * perf_1d_score +
+        0.40 * vol_score +
+        0.08 * rsi_1h_score +
+        0.10 * rsi_4h_score +
+        0.13 * rsi_1d_score +
+        0.12 * perf_1d_score +
         0.09 * perf_7d_score +
         0.075 * perf_30d_score +
         0.06 * perf_90d_score +
