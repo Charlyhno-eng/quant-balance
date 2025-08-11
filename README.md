@@ -80,18 +80,7 @@ uvicorn main:app --reload
 Here is a simple equation summarizing your risk calculation:
 
 Risk Score = 10 × clamp(
-  0.35 × (volatility / 2)
-+ 0.35 × fearAndGreedNorm
-+ 0.08 × scaleRSI(rsi_1h)
-+ 0.09 × scaleRSI(rsi_4h)
-+ 0.10 × scaleRSI(rsi_1d)
-+ 0.10 × scalePerf(perf_1d, 20)
-+ 0.05 × scalePerf(perf_7d, 50)
-+ 0.05 × scalePerf(perf_30d, 100)
-+ 0.05 × scalePerf(perf_90d, 100)
-+ 0.05 × scalePerf(perf_120d, 100),
-  1,
-  1
+  0.35 × (volatility / 2 + 0.35 × fearAndGreedNor + 0.08 × scaleRSI(rsi_1h + 0.09 × scaleRSI(rsi_4h + 0.10 × scaleRSI(rsi_1d + 0.10 × scalePerf(perf_1d, 20 + 0.05 × (perf_7d, 50 0.05 × scalePerf(perf_30d, 100 + 0.05 × scalePerf(perf_90d, 100 + 0.05 × scalePerf(perf_120d, 100), 1, 1
 )
 
 where:
