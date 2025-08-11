@@ -1,9 +1,9 @@
 import { CryptoData } from '@/shared/types/typeMainPage';
 
-const MIN_ALLOCATION = 5;
+const MIN_ALLOCATION = 3;
 const MAX_ALLOCATION = 35;
 const HIGH_RISK_THRESHOLD = 7.5;
-const MAX_CRYPTOS = 10;
+const MAX_CRYPTOS = 8;
 
 /**
  * Determines the allocation share for USDC based on the proportion of high-risk assets.

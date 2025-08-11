@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Box, Typography, Divider } from '@mui/material';
 import CustomTitle from '@/components/CustomTitle';
-import cryptoSelection from '@/core/domain/data/cryptoSelection.json' assert { type: 'json' };
+import cryptoSelection from '@/infrastructure/data/cryptoSelection.json' assert { type: 'json' };
 import { CryptoSelection, CryptoData } from '@/shared/types/typeMainPage';
 import { computeIdealWallet } from '@/core/domain/idealPortfolio';
 import PortfolioBalancerChart from './PortfolioBalancerChart';
@@ -98,8 +98,7 @@ export default function PortfolioBalancer() {
         { label: '60 Days', value: stats.perf_60d },
         { label: '90 Days', value: stats.perf_90d },
         { label: '120 Days', value: stats.perf_120d },
-      ]
-    : [];
+      ] : [];
 
   return (
     <Box sx={{ bgcolor: 'rgba(10, 26, 51, 0.7)', height: '100%', display: 'flex', flexDirection: 'column', color: 'white' }}>

@@ -6,7 +6,7 @@ import { RiskData, ExtendedRiskData, SymbolAmount } from '@/shared/types/typeMai
 import PortfolioTable from './_components/PortfolioTable';
 import PortfolioDistribution from './_components/PortfolioDistribution';
 import PortfolioBalancer from './_components/PortfolioBalancer';
-import myWalletWithAmount from '@/core/domain/data/myWallet.json' assert { type: 'json' };
+import myWalletWithAmount from '@/infrastructure/data/myWallet.json' assert { type: 'json' };
 
 const typedMyWalletWithAmount = myWalletWithAmount as SymbolAmount[];
 
@@ -71,7 +71,7 @@ export default function Home() {
     <Box sx={{ width: "100%", p: 1 }}>
       {error && (<Typography color="error" sx={{ mt: 2 }}>{error}</Typography>)}
 
-      {myWalletList.length === 0 && !error && (<Typography>Aucune donnée disponible.</Typography>)}
+      {myWalletList.length === 0 && !error && (<Typography>Chargement des données...</Typography>)}
       {myWalletList.length > 0 && (
         <>
           <Box sx={{ height: '40vh' }}><PortfolioTable dataList={myWalletList} /></Box>

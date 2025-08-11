@@ -25,7 +25,7 @@ This application helps users **balance their crypto wallet** based on the **leve
 * **Next.js** with **TypeScript** for the frontend
 * **Material UI (MUI)** for the UI components
 * **CCXT** for connecting to crypto exchanges and fetching market data
-* Backend server (assumed to be Python-based) to expose a REST API for crypto data
+* Backend server (Python-based) to expose a REST API for crypto data
 
 ---
 
@@ -50,17 +50,28 @@ npm install
 npm run dev
 ```
 
-Libraries for graphs : https://plotly.com/javascript/
+Libraries for graphs: [https://plotly.com/javascript/](https://plotly.com/javascript/)
 
 ---
 
-## Backend
+## Backend Python
+
+The backend of this application is developed in Python to leverage a mature and powerful ecosystem of libraries dedicated to technical analysis and financial data processing.
+
+### Why Python for the backend?
+
+* **Specialized libraries**: Python offers robust and easy-to-use libraries such as **pandas** for data manipulation, **ta** for technical indicators (RSI, MACD, etc.), and **numpy** for numerical computations.
+* **Simplified technical indicator calculations**: Computing complex indicators like RSI across multiple timeframes, volatility, and historical performance is more straightforward and efficient in Python compared to JavaScript.
+* **Integration of the Fear and Greed Index**: The backend also fetches external sentiment data, such as the Fear and Greed Index, a key market sentiment indicator that enriches the overall risk score calculation.
+* **Dedicated REST API**: The backend exposes all computed data through a REST API, allowing the Next.js frontend to stay lightweight and focused on the user interface.
+
+This architecture cleanly separates complex technical computations from presentation, ensuring a more performant, maintainable, and scalable application.
 
 ```bash
 uvicorn main:app --reload
 ```
 
-##### Test the API: http://127.0.0.1:8000/crypto_data?symbol=ENA
+##### Test the API: [http://127.0.0.1:8000/crypto\_data?symbol=BTC](http://127.0.0.1:8000/crypto_data?symbol=BTC)
 
 ---
 
@@ -69,7 +80,18 @@ uvicorn main:app --reload
 Here is a simple equation summarizing your risk calculation:
 
 $$
-\text{Risk Score} = 10 \times \text{clamp}\Big(0.4 \times \frac{\text{volatility}}{2} + 0.08 \times \text{scaleRSI}(rsi_{1h}) + 0.10 \times \text{scaleRSI}(rsi_{4h}) + 0.13 \times \text{scaleRSI}(rsi_{1d}) + 0.12 \times \text{scalePerf}(perf_{1d},20) + 0.09 \times \text{scalePerf}(perf_{7d},50) + 0.075 \times \text{scalePerf}(perf_{30d},100) + 0.06 \times \text{scalePerf}(perf_{90d},100) + 0.04 \times \text{scalePerf}(perf_{120d},100), 1, 1\Big)
+\text{Risk Score} = 10 \times \mathrm{clamp} \Bigg(
+0.35 \times \frac{\text{volatility}}{2}
++ 0.35 \times \text{fearAndGreedNorm}
++ 0.08 \times \text{scaleRSI}(rsi_{1h})
++ 0.09 \times \text{scaleRSI}(rsi_{4h})
++ 0.10 \times \text{scaleRSI}(rsi_{1d})
++ 0.10 \times \text{scalePerf}(perf_{1d}, 20)
++ 0.05 \times \text{scalePerf}(perf_{7d}, 50)
++ 0.05 \times \text{scalePerf}(perf_{30d}, 100)
++ 0.05 \times \text{scalePerf}(perf_{90d}, 100)
++ 0.05 \times \text{scalePerf}(perf_{120d}, 100), 1, 1
+\Bigg)
 $$
 
 where:
