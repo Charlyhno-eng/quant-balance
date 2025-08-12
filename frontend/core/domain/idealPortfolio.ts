@@ -109,8 +109,6 @@ export async function computeIdealWallet(cryptos: CryptoData[]) {
     const safeRisk = Math.max(c.data.risk_score, 0.0001);
     const metric = perfValue > 0 ? perfValue / (safeRisk * safeRisk) : -Infinity;
 
-    console.log(`${c.symbol} → avgPerf=${perfValue}, risk_score=${c.data.risk_score}, metric=${metric}`);
-
     return { ...c, metric };
   });
 

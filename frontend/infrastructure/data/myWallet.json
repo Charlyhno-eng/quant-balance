@@ -1,7 +1,7 @@
 [
   {
     "symbol": "USDC",
-    "amount": 7627
+    "amount": 1500
   },
   {
     "symbol": "RAY",
@@ -22,5 +22,17 @@
   {
     "symbol": "ENA",
     "amount": 2000
+  },
+  {
+    "symbol": "MORPHO",
+    "amount": 646.23
+  },
+  {
+    "symbol": "AERO",
+    "amount": 1141
+  },
+  {
+    "symbol": "SPK",
+    "amount": 33737
   }
 ]
