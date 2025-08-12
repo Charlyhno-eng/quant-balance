@@ -1,7 +1,7 @@
 import { CryptoData } from '@/shared/types/typeMainPage';
 
 const MIN_ALLOCATION = 3;
-const MAX_ALLOCATION = 35;
+const MAX_ALLOCATION = 25;
 const HIGH_RISK_THRESHOLD = 7.5;
 const MAX_CRYPTOS = 8;
 
