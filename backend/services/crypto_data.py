@@ -48,10 +48,10 @@ def compute_risk_score(volatility, fear_and_greed_value, rsi_1h, rsi_4h, rsi_1d,
     fear_and_greed_norm = clamp01(fear_and_greed_value / 100.0)
 
     risk_score = (
-        0.35 * vol_score +
+        0.30 * vol_score +
         0.35 * fear_and_greed_norm +
-        0.08 * rsi_1h_score +
-        0.09 * rsi_4h_score +
+        0.10 * rsi_1h_score +
+        0.10 * rsi_4h_score +
         0.10 * rsi_1d_score +
         0.10 * perf_1d_score +
         0.05 * perf_7d_score +
